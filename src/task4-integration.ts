@@ -10,7 +10,7 @@ import { Book } from "./task1-types";
  * Ваша задача — преобразовать их в правильные типы и проверить границы значений.
  */
 export function createBookFromForm(formData: FormData): Book {
-}
+
   // TODO 1: Получите сырые значения полей формы
   // Используйте formData.get("fieldName") as string
   // Поля: title, authors, year, rating
