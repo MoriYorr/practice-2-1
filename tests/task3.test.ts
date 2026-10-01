@@ -9,27 +9,9 @@ import type { Book } from "../src/task1-types";
 
 describe("Task 3: Фильтрация", () => {
   const books: Book[] = [
-    {
-      id: "1",
-      title: "TS Guide",
-      authors: ["John Doe", "Jane"],
-      year: 2023,
-      rating: 4.5,
-    },
-    {
-      id: "2",
-      title: "JS Basics",
-      authors: ["Alice"],
-      year: 2020,
-      rating: 3.0,
-    },
-    {
-      id: "3",
-      title: "Advanced TS",
-      authors: ["John Doe"],
-      year: 2022,
-      rating: 5.0,
-    },
+    { id: "1", title: "TS Guide", authors: ["John Doe", "Jane"], year: 2023, rating: 4.5, },
+    { id: "2", title: "JS Basics", authors: ["Alice"], year: 2020, rating: 3.0,},
+    { id: "3", title: "Advanced TS", authors: ["John Doe"], year: 2022, rating: 5.0, },
     { id: "4", title: "Old Book", authors: ["Bob"], year: 2015 },
     { id: "5", title: "No Year Book", authors: ["Charlie"] }, // Книга БЕЗ года для теста
   ];
