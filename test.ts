@@ -22,3 +22,17 @@ function printPoint(p: Point) {
  
 printPoint(new Vector());    // ок
 printPoint({ x: 1, y: 2 });  // ок
+
+interface User {
+  readonly id: number;
+  name: string;
+  email?: string;
+  readonly tags: string[];
+}
+ 
+function send(u: User) {
+  u.id = 5;               // ошибка: readonly
+  u.email.toLowerCase();  // ошибка: undefined?
+  u.email?.toLowerCase(); // ок
+  u.tags[0] = "новый";     // ???
+}

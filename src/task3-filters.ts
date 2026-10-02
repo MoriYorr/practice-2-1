@@ -8,6 +8,11 @@ import type { Book, BookFilter } from "./task1-types";
 //   - authorName (string): имя или часть имени автора для поиска
 // Возвращает: функцию типа BookFilter, которая возвращает true, если автор есть в списке book.authors
 // Подсказка: используйте метод массива .some() и приведите строки к нижнему регистру для нечувствительного поиска.
+// TODO 1: Создайте фильтр по имени автора
+// Параметры:
+//   - authorName (string): имя или часть имени автора для поиска
+// Возвращает: функцию типа BookFilter, которая возвращает true, если автор есть в списке book.authors
+// Подсказка: используйте метод массива .some() и приведите строки к нижнему регистру для нечувствительного поиска.
 export const filterByAuthor = (authorName: string): BookFilter => {
   const query = authorName.trim().toLowerCase();
   return (book) =>
@@ -15,6 +20,11 @@ export const filterByAuthor = (authorName: string): BookFilter => {
     book.authors.some((author) => author.toLowerCase().includes(query));
 };
 
+// TODO 2: Создайте фильтр по минимальному году издания
+// Параметры:
+//   - year (number): минимальный год
+// Возвращает: функцию типа BookFilter, которая возвращает true, если book.year >= year
+// Подсказка: не забудьте проверить, что book.year !== undefined, иначе будет ошибка.
 // TODO 2: Создайте фильтр по минимальному году издания
 // Параметры:
 //   - year (number): минимальный год
