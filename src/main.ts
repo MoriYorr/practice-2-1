@@ -6,10 +6,10 @@ import { applyFilters, filterByAuthor, filterByMinYear } from './task3-filters';
 import { createBookFromForm } from './task4-integration';
 
 // Готовые данные для старта
-let initialBooks: Catalog = {
-  '1': { id: '1', title: 'TypeScript Guide', authors: ['John Doe'], year: 2024 },
-  '2': { id: '2', title: 'JavaScript Basics', authors: ['Jane Smith'], year: 2022 },
-};
+const initialBooks: Book[] = [
+  { id: '1', title: 'TypeScript Guide', authors: ['John Doe'], year: 2023 },
+  { id: '2', title: 'JavaScript Basics', authors: ['Jane Smith'], year: 2022 },
+];
 
 const bookList = document.getElementById('bookList') as HTMLDivElement;
 const bookForm = document.getElementById('bookForm') as HTMLFormElement;

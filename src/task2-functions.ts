@@ -3,11 +3,6 @@
 
 // TODO 0: Импортируйте типы Book и Catalog из файла task1-types.ts
 import type { Book, Catalog } from './task1-types';
-// Задание 2: Функции работы с каталогом
-// Управление данными без мутации исходных объектов (иммутабельность)
-
-// TODO 0: Импортируйте типы Book и Catalog из файла task1-types.ts
-import type { Book, Catalog } from './task1-types';
 
 // TODO 1: Добавьте книгу в каталог
 // Параметры:
