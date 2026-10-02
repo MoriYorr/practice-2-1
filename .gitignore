@@ -5,3 +5,7 @@ dist/
 .vscode/
 .idea/
 coverage/
+
+# Local planning documents
+/PLAN.md
+/SPEC.md
