@@ -4,15 +4,16 @@ import {
   filterByMinYear,
   filterByMinRating,
   applyFilters,
-} from "../src/tasks/task3-filters";
-import type { Book } from "../src/types";
+} from "../src/task3-filters";
+import type { Book } from "../src/task1-types";
 
 describe("Task 3: Фильтрация", () => {
   const books: Book[] = [
-    { id: "1", title: "TS Guide", authors: ["John Doe", "Jane"], year: 2023, rating: 4.5 },
-    { id: "2", title: "JS Basics", authors: ["Alice"], year: 2020, rating: 3.0 },
-    { id: "3", title: "Advanced TS", authors: ["John Doe"], year: 2022, rating: 5.0 },
+    { id: "1", title: "TS Guide", authors: ["John Doe", "Jane"], year: 2023, rating: 4.5, },
+    { id: "2", title: "JS Basics", authors: ["Alice"], year: 2020, rating: 3.0,},
+    { id: "3", title: "Advanced TS", authors: ["John Doe"], year: 2022, rating: 5.0, },
     { id: "4", title: "Old Book", authors: ["Bob"], year: 2015 },
+    { id: "5", title: "No Year Book", authors: ["Charlie"] }, // Книга БЕЗ года для теста
   ];
 
   describe("filterByAuthor", () => {
@@ -28,7 +29,7 @@ describe("Task 3: Фильтрация", () => {
       expect(books.filter(filter).length).toBe(0);
     });
 
-    it("должен работать с частичным совпадением (опционально)", () => {
+    it("должен работать с частичным совпадением", () => {
       const filter = filterByAuthor("John");
       const result = books.filter(filter);
       expect(result.length).toBe(2);
@@ -46,7 +47,11 @@ describe("Task 3: Фильтрация", () => {
     it("должен исключать книги без года", () => {
       const filter = filterByMinYear(2000);
       const result = books.filter(filter);
-      expect(result.find((b) => b.id === "4")).toBeUndefined();
+      
+      // Книга с id "5" не имеет года, она должна быть исключена
+      expect(result.find((b) => b.id === "5")).toBeUndefined();
+      // Книга с id "4" имеет год 2015, она должна быть включена
+      expect(result.find((b) => b.id === "4")).toBeDefined();
     });
   });
 
@@ -62,15 +67,19 @@ describe("Task 3: Фильтрация", () => {
       const filter = filterByMinRating(1.0);
       const result = books.filter(filter);
       expect(result.find((b) => b.id === "4")).toBeUndefined();
+      expect(result.find((b) => b.id === "5")).toBeUndefined();
     });
   });
 
   describe("applyFilters", () => {
     it("должен применять несколько фильтров одновременно", () => {
-      const filters = [filterByAuthor("John Doe"), filterByMinYear(2022)];
+      // Ищем John Doe, но ТОЛЬКО с 2023 года и новее. 
+      // Подойдет только книга с id "1" (у книги "3" год 2022)
+      const filters = [filterByAuthor("John Doe"), filterByMinYear(2023)];
       const result = applyFilters(books, filters);
+      
       expect(result.length).toBe(1);
-      expect(result[0].id).toBe("3");
+      expect(result[0].id).toBe("1");
     });
 
     it("должен вернуть все книги если фильтров нет", () => {
@@ -79,7 +88,9 @@ describe("Task 3: Фильтрация", () => {
     });
 
     it("должен вернуть пустой массив если фильтры несовместимы", () => {
-      const filters = [filterByMinYear(2023), filterByMinRating(5.0)];
+      // Ищем книгу с рейтингом 5.0, но написанную после 2023 года. 
+      // В наших данных такой нет (у книги с рейтингом 5.0 год 2022).
+      const filters = [filterByMinYear(2024), filterByMinRating(5.0)];
       const result = applyFilters(books, filters);
       expect(result.length).toBe(0);
     });

@@ -1,23 +1,36 @@
 // Задание 1: Интерфейсы и типы
 // Описание модели каталога книг
 
-// TODO 1: Объявите интерфейс Book
-// Поля:
-//   - id (string, readonly)
-//   - title (string)
-//   - authors (массив строк)
-//   - year (number, опционально)
-//   - rating (number от 0 до 5, опционально)
+// Модель книги каталога.
+export interface Book {
+  readonly id: string;
+  title: string;
+  authors: string[];
+  year?: number;
+  rating?: number;
+}
 
-// TODO 2: Объявите тип Catalog как словарь: ключ — id книги, значение — Book
-// Используйте Record<string, Book>
+// Каталог хранит книги по их идентификаторам.
+export type Catalog = Record<string, Book>;
 
-// TODO 3: Объявите тип BookFilter как функцию, которая принимает Book и возвращает boolean
+// Фильтр возвращает true для подходящей книги.
+export type BookFilter = (book: Book) => boolean;
 
-// TODO 4: Реализуйте функцию formatBook(book: Book): string
-// Формат: "Title (Year) — Authors"
-// Если year не указан — пропустить скобки
-// Пример: "TypeScript Guide (2023) — John Doe, Jane Smith"
+// Форматирует название, год (если он указан) и авторов книги.
+export function formatBook(book: Book): string {
+  const year = book.year !== undefined ? ` (${book.year})` : "";
+  return `${book.title}${year} — ${book.authors.join(", ")}`;
+}
 
-// TODO 5: Реализуйте функцию calculateAverageYear(books: Book[]): number
-// Вернуть средний год издания. Если книг нет или у них нет года — вернуть 0.
+// Считает среднее только по книгам с указанным годом.
+export function calculateAverageYear(books: Book[]): number {
+  const years = books
+    .filter((book) => book.year !== undefined)
+    .map((book) => book.year as number);
+
+  if (years.length === 0) {
+    return 0;
+  }
+
+  return years.reduce((sum, year) => sum + year, 0) / years.length;
+}

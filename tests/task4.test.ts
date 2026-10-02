@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { createBookFromForm } from "../src/tasks/task4-integration";
-import type { Book } from "../src/types";
+import { createBookFromForm } from "../src/task4-integration";
+import type { Book } from '../src/task1-types';
 
 describe("Task 4: Интеграция с DOM", () => {
   it("createBookFromForm должен создавать книгу из FormData", () => {
@@ -61,5 +61,22 @@ describe("Task 4: Интеграция с DOM", () => {
     expect(book.year).toBe(2020);
     expect(typeof book.rating).toBe("number");
     expect(book.rating).toBe(3.5);
+  });
+    it("createBookFromForm должен выбрасывать ошибку при рейтинге > 5", () => {
+    const formData = new FormData();
+    formData.append("title", "Test");
+    formData.append("authors", "Test Author");
+    formData.append("rating", "6.0");
+
+    expect(() => createBookFromForm(formData)).toThrow("Рейтинг должен быть числом от 0 до 5");
+  });
+
+  it("createBookFromForm должен выбрасывать ошибку при рейтинге < 0", () => {
+    const formData = new FormData();
+    formData.append("title", "Test");
+    formData.append("authors", "Test Author");
+    formData.append("rating", "-1");
+
+    expect(() => createBookFromForm(formData)).toThrow("Рейтинг должен быть числом от 0 до 5");
   });
 });

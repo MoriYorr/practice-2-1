@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { formatBook, calculateAverageYear } from "../src/tasks/task1-types";
-import type { Book } from "../src/types";
+import { formatBook, calculateAverageYear } from "../src/task1-types";
+import type { Book } from '../src/task1-types';
 
 describe("Task 1: Интерфейсы", () => {
   const bookWithYear: Book = {
